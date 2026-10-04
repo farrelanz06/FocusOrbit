@@ -10,8 +10,9 @@ import { Collapsible } from "@/components/ui/collapsible";
 import { WebBadge } from "@/components/web-badge";
 import { BottomTabInset, MaxContentWidth, Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
+import { Stack } from "expo-router";
 
-export default function TabTwoScreen() {
+export function TabTwoScreen() {
   const safeAreaInsets = useSafeAreaInsets();
   const insets = {
     ...safeAreaInsets,
@@ -144,6 +145,9 @@ export default function TabTwoScreen() {
   );
 }
 
+export default function RootLayout() {
+  return <Stack screenOptions={{ headerShown: false }} />;
+}
 const styles = StyleSheet.create({
   scrollView: {
     flex: 1,

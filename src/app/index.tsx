@@ -1,98 +1,95 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Alert, Button, Pressable, Text, TextInput, View } from "react-native";
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import { useState } from "react";
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
+import { planets } from "../data/planets";
+import { styles } from "../styles/styles";
+import { Planet } from "../types/planet";
+
+export default function Index() {
+  const [task, setTask] = useState("");
+  const [selectedPlanet, setSelectedPlanet] = useState<Planet | null>(null);
+
+  const selectPlanet = (planet: Planet) => {
+    setSelectedPlanet(planet);
+  };
+
+  const startFocus = () => {
+    if (task === "") {
+      Alert.alert("Focus Orbit", "Please enter your learning task first.");
+      return;
+    }
+
+    if (selectedPlanet === null) {
+      Alert.alert("Focus Orbit", "Please choose a planet first.");
+      return;
+    }
+
+    Alert.alert(
+      "Mission Ready 🚀",
+      `Task: ${task}\nPlanet: ${selectedPlanet.name}\nFocus: ${selectedPlanet.duration} minutes`,
     );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+  };
+
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
+    <View style={styles.container}>
+      <Text style={styles.title}>🚀 Focus Orbit</Text>
+
+      <Text style={styles.subtitle}>
+        Turn your study session into a space journey.
+      </Text>
+
+      <Text style={styles.sectionTitle}>Choose Your Learning Planet</Text>
+
+      {planets.map((planet) => (
+        <Pressable
+          key={planet.id}
+          onPress={() => selectPlanet(planet)}
+          style={[
+            styles.planetCard,
+            selectedPlanet?.id === planet.id && styles.selectedCard,
+          ]}
+        >
+          <Text style={styles.planetName}>
+            {planet.icon} {planet.name}
+          </Text>
+
+          <Text style={styles.duration}>Focus: {planet.duration} minutes</Text>
+
+          <Text style={styles.description}>{planet.description}</Text>
+        </Pressable>
+      ))}
+
+      <Text style={styles.sectionTitle}>Learning Task</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Example: Study React Native"
+        value={task}
+        onChangeText={setTask}
+      />
+
+      {selectedPlanet && (
+        <Text style={styles.selectedText}>
+          Selected mission: {selectedPlanet.icon} {selectedPlanet.name} —{" "}
+          {selectedPlanet.duration} minutes
+        </Text>
+      )}
+
+      <View style={styles.button}>
+        <Button title="START FOCUS 🚀" onPress={startFocus} />
+      </View>
+
+      <Text
+        style={{
+          color: "#7F8BB5",
+          textAlign: "center",
+          marginTop: 20,
+          fontSize: 12,
+        }}
+      >
+        Your journey begins with one focused session.
+      </Text>
+    </View>
   );
 }
-
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
-  },
-  title: {
-    textAlign: 'center',
-  },
-  code: {
-    textTransform: 'uppercase',
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
-  },
-});

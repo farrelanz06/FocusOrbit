@@ -7,6 +7,13 @@ export const styles = StyleSheet.create({
     backgroundColor: "#0B1026",
   },
 
+  centerContainer: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: "#0B1026",
+    justifyContent: "center",
+  },
+
   title: {
     fontSize: 30,
     fontWeight: "bold",
@@ -74,5 +81,34 @@ export const styles = StyleSheet.create({
 
   button: {
     marginTop: 10,
+  },
+
+  footerText: {
+    color: "#7F8BB5",
+    textAlign: "center",
+    marginTop: 20,
+    fontSize: 12,
+  },
+
+  // --- Modul 2 ---
+  planetEmoji: {
+    fontSize: 80,
+    textAlign: "center",
+  },
+
+  timerText: {
+    fontSize: 64,
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+
+  resultTask: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#D8DEFF",
+    textAlign: "center",
+    marginBottom: 25,
   },
 });

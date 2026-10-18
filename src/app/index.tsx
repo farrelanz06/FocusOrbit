@@ -28,6 +28,12 @@ export default function Index() {
     Alert.alert(
       "Mission Ready 🚀",
       `Task: ${task}\nPlanet: ${selectedPlanet.name}\nFocus: ${selectedPlanet.duration} minutes`,
+      [
+        {
+          text: "Tombol berhasil ditekan",
+          onPress: () => console.log("Tombol berhasil ditekan"),
+        },
+      ],
     );
   };
 

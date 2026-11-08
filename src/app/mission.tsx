@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+// MEMBER 2 — Mission: timer (useState + useEffect), back(), canGoBack(), replace()
+>>>>>>> origin/main
 import { Alert, Button, Text, View } from "react-native";
 
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -39,7 +43,11 @@ export default function Mission() {
   useEffect(() => {
     if (planet && secondsLeft <= 0) {
       router.replace({
+<<<<<<< HEAD
         pathname: "../result",
+=======
+        pathname: "/result",
+>>>>>>> origin/main
         params: {
           task,
           planetName: planet.name,

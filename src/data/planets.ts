@@ -7,6 +7,7 @@ export const planets: Planet[] = [
     icon: "🌙",
     duration: 15,
     description: "Short focus session for quick learning.",
+    apiId: "lune",
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ export const planets: Planet[] = [
     icon: "🔴",
     duration: 25,
     description: "Standard focus session for studying.",
+    apiId: "mars",
   },
   {
     id: 3,
@@ -21,5 +23,6 @@ export const planets: Planet[] = [
     icon: "🪐",
     duration: 45,
     description: "Long focus session for deep learning.",
+    apiId: "jupiter",
   },
 ];

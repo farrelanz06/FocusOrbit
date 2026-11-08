@@ -11,6 +11,7 @@ import {
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 
+import PlanetInfoCard from "../components/PlanetInfoCard";
 import { planets } from "../data/planets";
 import { styles } from "../styles/styles";
 import { Planet } from "../types/planet";
@@ -47,10 +48,12 @@ export default function Index() {
 
     // router.push: Mission ditumpuk di atas Home, bisa kembali dengan back()
     router.push({
-      pathname: "/mission",
+      pathname: "../mission",
       params: { task: task.trim(), planetId: String(selectedPlanet.id) },
     });
   };
+
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   return (
     <ScrollView style={{ backgroundColor: "#0B1026" }}>
@@ -84,6 +87,8 @@ export default function Index() {
           </Pressable>
         ))}
 
+        {selectedPlanet && <PlanetInfoCard apiId={selectedPlanet.apiId} />}
+
         <Text style={styles.sectionTitle}>Learning Task</Text>
 
         <TextInput
@@ -97,6 +102,14 @@ export default function Index() {
 
         <View style={styles.button}>
           <Button title="START FOCUS 🚀" onPress={startFocus} />
+        </View>
+
+        <View style={{}}>
+          <Button
+            title={isDarkMode ? "Light Mode" : "Dark Mode"}
+            onPress={() => setIsDarkMode(!isDarkMode)}
+            color={isDarkMode ? "#FFD700" : "#333333"}
+          />
         </View>
 
         <Text style={styles.footerText}>

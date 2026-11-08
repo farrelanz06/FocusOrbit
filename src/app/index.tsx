@@ -86,6 +86,8 @@ export default function Index() {
           </Pressable>
         ))}
 
+        {selectedPlanet && <PlanetInfoCard apiId={selectedPlanet.apiId} />}
+
         <Text style={styles.sectionTitle}>Learning Task</Text>
 
         <TextInput

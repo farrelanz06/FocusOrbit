@@ -6,4 +6,5 @@ export interface Planet {
   icon: string;
   duration: number;
   description: string;
+  apiId: string;
 }

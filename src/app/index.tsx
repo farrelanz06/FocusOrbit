@@ -11,6 +11,7 @@ import {
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 
+import PlanetInfoCard from "../components/PlanetInfoCard";
 import { planets } from "../data/planets";
 import { styles } from "../styles/styles";
 import { Planet } from "../types/planet";

@@ -52,6 +52,8 @@ export default function Index() {
     });
   };
 
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
   return (
     <ScrollView style={{ backgroundColor: "#0B1026" }}>
       <View style={styles.container}>
@@ -97,6 +99,14 @@ export default function Index() {
 
         <View style={styles.button}>
           <Button title="START FOCUS 🚀" onPress={startFocus} />
+        </View>
+
+        <View style={{}}>
+          <Button
+            title={isDarkMode ? "Light Mode" : "Dark Mode"}
+            onPress={() => setIsDarkMode(!isDarkMode)}
+            color={isDarkMode ? "#FFD700" : "#333333"}
+          />
         </View>
 
         <Text style={styles.footerText}>

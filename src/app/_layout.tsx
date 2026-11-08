@@ -146,8 +146,15 @@ export function TabTwoScreen() {
 }
 
 export default function RootLayout() {
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" />
+      <Stack.Screen name="mission" />
+      <Stack.Screen name="result" />
+    </Stack>
+  );
 }
+
 const styles = StyleSheet.create({
   scrollView: {
     flex: 1,

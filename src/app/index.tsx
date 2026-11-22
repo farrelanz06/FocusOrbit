@@ -23,6 +23,8 @@ export default function Index() {
   const [selectedPlanet, setSelectedPlanet] = useState<Planet | null>(null);
   const [tip, setTip] = useState("Choose a planet to see your mission tip.");
 
+  console.log("Supabase URL:", process.env.EXPO_PUBLIC_SUPABASE_URL);
+
   // useEffect: jalan setiap selectedPlanet berubah
   useEffect(() => {
     if (selectedPlanet === null) return;
@@ -52,8 +54,6 @@ export default function Index() {
       params: { task: task.trim(), planetId: String(selectedPlanet.id) },
     });
   };
-
-  const [isDarkMode, setIsDarkMode] = useState(true);
 
   return (
     <ScrollView style={{ backgroundColor: "#0B1026" }}>
@@ -102,14 +102,6 @@ export default function Index() {
 
         <View style={styles.button}>
           <Button title="START FOCUS 🚀" onPress={startFocus} />
-        </View>
-
-        <View style={{}}>
-          <Button
-            title={isDarkMode ? "Light Mode" : "Dark Mode"}
-            onPress={() => setIsDarkMode(!isDarkMode)}
-            color={isDarkMode ? "#FFD700" : "#333333"}
-          />
         </View>
 
         <Text style={styles.footerText}>

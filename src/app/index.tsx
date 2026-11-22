@@ -23,6 +23,8 @@ export default function Index() {
   const [selectedPlanet, setSelectedPlanet] = useState<Planet | null>(null);
   const [tip, setTip] = useState("Choose a planet to see your mission tip.");
 
+  console.log("Supabase URL:", process.env.EXPO_PUBLIC_SUPABASE_URL);
+
   // useEffect: jalan setiap selectedPlanet berubah
   useEffect(() => {
     if (selectedPlanet === null) return;

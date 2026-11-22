@@ -1,29 +1,29 @@
 import {
-  Alert,
-  Button,
-  Pressable,
-  ScrollView,
-  Text,
-  TextInput,
-  View,
+    Alert,
+    Button,
+    Pressable,
+    ScrollView,
+    Text,
+    TextInput,
+    View,
 } from "react-native";
 
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 
-import PlanetInfoCard from "../components/PlanetInfoCard";
-import { planets } from "../data/planets";
-import { styles } from "../styles/styles";
-import { Planet } from "../types/planet";
+import PlanetInfoCard from "../../components/PlanetInfoCard";
+import { useAuth } from "../../context/AuthContext";
+import { planets } from "../../data/planets";
+import { styles } from "../../styles/styles";
+import { Planet } from "../../types/planet";
 
 export default function Index() {
   const router = useRouter();
+  const { user, signOut } = useAuth();
 
   const [task, setTask] = useState("");
   const [selectedPlanet, setSelectedPlanet] = useState<Planet | null>(null);
   const [tip, setTip] = useState("Choose a planet to see your mission tip.");
-
-  console.log("Supabase URL:", process.env.EXPO_PUBLIC_SUPABASE_URL);
 
   // useEffect: jalan setiap selectedPlanet berubah
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function Index() {
 
     // router.push: Mission ditumpuk di atas Home, bisa kembali dengan back()
     router.push({
-      pathname: "../mission",
+      pathname: "/mission",
       params: { task: task.trim(), planetId: String(selectedPlanet.id) },
     });
   };
@@ -64,6 +64,10 @@ export default function Index() {
 
         <Text style={styles.subtitle}>
           Turn your study session into a space journey.
+        </Text>
+
+        <Text style={styles.selectedText}>
+          Welcome, {user?.user_metadata?.callsign ?? user?.email} 🧑‍🚀
         </Text>
 
         <Text style={styles.sectionTitle}>Choose Your Learning Planet</Text>
@@ -112,6 +116,10 @@ export default function Index() {
             onPress={() => setIsDarkMode(!isDarkMode)}
             color={isDarkMode ? "#FFD700" : "#333333"}
           />
+        </View>
+
+        <View style={styles.button}>
+          <Button title="SIGN OUT 🔒" color="#D64545" onPress={signOut} />
         </View>
 
         <Text style={styles.footerText}>

@@ -1,3 +1,4 @@
+// MEMBER 2 — Mission: timer (useState + useEffect), back(), canGoBack(), replace()
 import { Alert, Button, Text, View } from "react-native";
 
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -12,7 +13,7 @@ const formatTime = (totalSeconds: number) => {
   return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
 };
 
-export default function Mission() {
+export default function testapi() {
   const router = useRouter();
   const { task, planetId } = useLocalSearchParams<{
     task: string;
@@ -39,7 +40,7 @@ export default function Mission() {
   useEffect(() => {
     if (planet && secondsLeft <= 0) {
       router.replace({
-        pathname: "../result",
+        pathname: "/result",
         params: {
           task,
           planetName: planet.name,

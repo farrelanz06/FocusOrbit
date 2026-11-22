@@ -3,7 +3,7 @@ import { Button, Text, View } from "react-native";
 
 import { useLocalSearchParams, useRouter } from "expo-router";
 
-import { styles } from "../styles/styles";
+import { styles } from "../../styles/styles";
 
 export default function Result() {
   const router = useRouter();

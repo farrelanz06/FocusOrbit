@@ -31,7 +31,7 @@ export function fetchPlanetInfo(
   apiId: string,
 ): Promise<ApiResponse<PlanetInfo>> {
   return new Promise((resolve, reject) => {
-    if (!API_KEY || API_KEY === "0d88813c-8b27-4853-92a5-67782b72358f") {
+    if (!API_KEY || API_KEY === "60744b88-e210-4262-8395-5a2df6ca155c") {
       reject(new Error("API key belum diisi."));
       return;
     }
